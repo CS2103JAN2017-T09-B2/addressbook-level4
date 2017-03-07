@@ -18,7 +18,8 @@ import seedu.address.model.tag.UniqueTagList;
  * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
-
+	
+	//Test
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
