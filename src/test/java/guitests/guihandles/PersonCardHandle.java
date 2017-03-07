@@ -17,7 +17,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String DATE_FIELD_ID = "#date";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -40,8 +40,8 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getDate() {
+        return getTextFromLabel(DATE_FIELD_ID);
     }
 
     public String getEmail() {
@@ -74,7 +74,7 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
+                && getDate().equals(person.getDate().value)
                 && getEmail().equals(person.getEmail().value)
                 && getAddress().equals(person.getAddress().value)
                 && getTags().equals(getTags(person.getTags()));
@@ -85,7 +85,7 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
+                    && getDate().equals(handle.getDate())
                     && getEmail().equals(handle.getEmail())
                     && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
