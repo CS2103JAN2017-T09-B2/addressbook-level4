@@ -2,9 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateTask;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Date;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -45,7 +45,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withDate(String date) throws IllegalValueException {
-        this.person.setDate(new Date(date));
+        this.person.setDate(new DateTask(date));
         return this;
     }
 

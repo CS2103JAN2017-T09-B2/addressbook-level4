@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateTask;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Date;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -15,7 +15,7 @@ public class TestPerson implements ReadOnlyTask {
     private Name name;
     private Address address;
     private Email email;
-    private Date date;
+    private DateTask date;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -45,7 +45,7 @@ public class TestPerson implements ReadOnlyTask {
         this.email = email;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DateTask date) {
         this.date = date;
     }
 
@@ -59,7 +59,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Date getDate() {
+    public DateTask getDate() {
         return date;
     }
 

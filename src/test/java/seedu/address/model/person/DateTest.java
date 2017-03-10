@@ -10,15 +10,15 @@ public class DateTest {
     @Test
     public void isValidDate() {
         // invalid date numbers
-        assertFalse(Date.isValidDate("")); // empty string
-        assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("date")); // non-numeric
-        assertFalse(Date.isValidDate("9011p041")); // alphabets within digits
-        assertFalse(Date.isValidDate("9312 1534")); // spaces within digits
+        assertFalse(DateTask.isValidDate("")); // empty string
+        assertFalse(DateTask.isValidDate(" ")); // spaces only
+        assertFalse(DateTask.isValidDate("date")); // non-numeric
+        assertFalse(DateTask.isValidDate("9011p041")); // alphabets within digits
+        assertFalse(DateTask.isValidDate("9312 1534")); // spaces within digits
 
         // valid date numbers
-        assertTrue(Date.isValidDate("93121534"));
-        assertTrue(Date.isValidDate("4")); // short date numbers
-        assertTrue(Date.isValidDate("124293842033123")); // long date numbers
+        assertTrue(DateTask.isValidDate("93121534"));
+        assertTrue(DateTask.isValidDate("4")); // short date numbers
+        assertTrue(DateTask.isValidDate("124293842033123")); // long date numbers
     }
 }

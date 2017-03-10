@@ -7,9 +7,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateTask;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Date;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniquePersonList;
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Date updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
+        DateTask updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
@@ -92,7 +92,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<DateTask> date = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -123,12 +123,12 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDate(Optional<Date> date) {
+        public void setDate(Optional<DateTask> date) {
             assert date != null;
             this.date = date;
         }
 
-        public Optional<Date> getDate() {
+        public Optional<DateTask> getDate() {
             return date;
         }
 

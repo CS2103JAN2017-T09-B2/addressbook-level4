@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Date date;
+    private DateTask date;
     private Email email;
     private Address address;
 
@@ -21,7 +21,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Date date, Email email, Address address, UniqueTagList tags) {
+    public Task(Name name, DateTask date, Email email, Address address, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, date, email, address, tags);
         this.name = name;
         this.date = date;
@@ -47,13 +47,13 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DateTask date) {
         assert date != null;
         this.date = date;
     }
 
     @Override
-    public Date getDate() {
+    public DateTask getDate() {
         return date;
     }
 
