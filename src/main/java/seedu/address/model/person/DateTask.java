@@ -24,7 +24,7 @@ public class DateTask {
 			if(date_task.equals("")){
 				this.calendar = null;
 				this.date = null;
-				this.value = "";	
+				this.value = "";
 			}
 			else{
 				String [] date_time = date_task.trim().split("\\s+");
@@ -41,7 +41,6 @@ public class DateTask {
 			this.calendar = null;
 		}
 	}
-	
     /**
      * Returns true if a given string is a valid task's date.
      */
