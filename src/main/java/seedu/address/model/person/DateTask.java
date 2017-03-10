@@ -41,12 +41,12 @@ public class DateTask {
 			this.calendar = null;
 		}
 	}
-    /**
-     * Returns true if a given string is a valid task's date.
-     */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
-    }
+	/**
+	 * Returns true if a given string is a valid task's date.
+	 */
+	public static boolean isValidDate(String test) {
+		return test.matches(DATE_VALIDATION_REGEX);
+	}
 
 	private Date mutateToDate(String date_task) throws IllegalValueException{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm");
