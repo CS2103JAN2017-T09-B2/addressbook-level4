@@ -11,7 +11,8 @@ import seedu.address.model.task.Task;
  * Adds a person to the address book.
  */
 public class AddCommand extends Command {
-
+	
+	//Test
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_WORD2 = "a";
     public static final String COMMAND_WORD3 = "+";
