@@ -12,10 +12,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.TestUtil;
+import seedu.typeTask.TestApp;
+import seedu.typeTask.model.task.ReadOnlyTask;
+import seedu.typeTask.model.task.Task;
+import seedu.typeTask.testutil.TestUtil;
 
 /**
  * Provides a handle for the panel containing the person list.
