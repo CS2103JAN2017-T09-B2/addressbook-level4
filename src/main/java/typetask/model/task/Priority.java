@@ -7,14 +7,14 @@ public class Priority {
     private boolean priority;
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Priority should be either in true or false.";
+            "Priority should be either in high or low.";
     
     //priorityList stores the list of priority tasks
     private static Vector<Task> priorityList;
     private Task task;
 
     /**
-     * Tasks added without priority will be false by default.
+     * Tasks added without priority will be in low priority by default.
      * @param task
      */
     public Priority (Task task) {
@@ -22,21 +22,17 @@ public class Priority {
         this.task = task;
     }
 
-    public Priority(boolean priority, Task task) {
-        this.task = task;
-        addPriority();
-    }
-
     public Priority(String priority, Task task) {
         String amended = priority.substring(2).trim();
 
         this.task = task;
-        
-        if (amended.toLowerCase().compareTo("true") == 0) {
-            addPriority();
-        } else {
+
+        if (amended.toLowerCase().compareTo("high") == 0) {
+            setHighPriority();
+        } else if (amended.toLowerCase().compareTo("low") == 0){
             this.priority = false;
         }
+
     }
 
     /**
@@ -47,12 +43,12 @@ public class Priority {
         return this.priority;
     }
     
-    public void removePriority() {
+    public void setLowPriority() {
       priorityList.remove(this.task);
       this.priority = false;
     }
     
-    public void addPriority() {
+    public void setHighPriority() {
       priorityList.addElement(task);
       this.priority = true;
     }
