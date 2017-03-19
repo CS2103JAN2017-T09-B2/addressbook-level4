@@ -70,14 +70,32 @@ public class TaskList implements Iterable<Task> {
 	 * Marks the task as done in the list at position {@code index} with
 	 * {@code editedTask}.
 	 *
+	 * @throws TaskNotFoundException
+	 *
 	 * @throws IndexOutOfBoundsException
 	 *             if {@code index} < 0 or >= the size of the list.
 	 */
-	public void completeTask(int index, ReadOnlyTask completedTask) {
+	public void completeTask(ReadOnlyTask completedTask) throws TaskNotFoundException {
 		assert completedTask != null;
-		Task taskToUpdate = internalList.get(index);
-		taskToUpdate.markComplete(completedTask);
-		internalList.set(index, taskToUpdate);
+		int internalIndex = findInternalIndex(completedTask);
+
+		if (internalIndex > -1) {
+			Task taskToUpdate = internalList.get(internalIndex);
+			taskToUpdate.markComplete(completedTask);
+			internalList.set(internalIndex, taskToUpdate);
+		}
+
+		else
+			throw new TaskNotFoundException();
+	}
+
+	private int findInternalIndex(ReadOnlyTask completedTask) {
+		for (int i = 0; i < internalList.size(); i++) {
+			if (completedTask.getName() == internalList.get(i).getName()) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	/**
