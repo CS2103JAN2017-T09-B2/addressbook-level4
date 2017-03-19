@@ -57,8 +57,9 @@ public class XmlAdaptedTask {
 		final DueDate date = new DueDate(this.date);
 		final Time time = new Time(this.time);
 		boolean isCompleted = false;
-		if (this.isCompleted != null)
+		if (this.isCompleted != null) {
 			isCompleted = this.isCompleted;
+		}
 		return new Task(name, date, time, isCompleted);
 	}
 }
