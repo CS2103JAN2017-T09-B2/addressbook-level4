@@ -1,5 +1,6 @@
 package typetask.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,116 +19,120 @@ import typetask.commons.util.CollectionUtil;
  */
 public class TaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+	private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
-    /**
-     * Returns true if the list contains an equivalent task as the given argument.
-     */
-    public boolean contains(ReadOnlyTask toCheck) {
-        assert toCheck != null;
-        return internalList.contains(toCheck);
-    }
+	/**
+	 * Returns true if the list contains an equivalent task as the given
+	 * argument.
+	 */
+	public boolean contains(ReadOnlyTask toCheck) {
+		assert toCheck != null;
+		return internalList.contains(toCheck);
+	}
 
-    /**
-     * Adds a task to the list.
-     */
-    public void add(Task toAdd) {
-        assert toAdd != null;
-        internalList.add(toAdd);
-    }
-    /**
-     * Refreshes the task list and sort them by deadlines
-     */
- //   public void refreshInternalList() {
-  //      internalList.sort(new TaskComparator());
-  //  }
+	/**
+	 * Adds a task to the list.
+	 */
+	public void add(Task toAdd) {
+		assert toAdd != null;
+		internalList.add(toAdd);
+	}
+	/**
+	 * Refreshes the task list and sort them by deadlines
+	 */
+	// public void refreshInternalList() {
+	// internalList.sort(new TaskComparator());
+	// }
 
-    /**
-     * Updates the task in the list at position {@code index} with {@code editedTask}.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateTask(int index, ReadOnlyTask editedTask) {
-        assert editedTask != null;
+	/**
+	 * Updates the task in the list at position {@code index} with
+	 * {@code editedTask}.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if {@code index} < 0 or >= the size of the list.
+	 */
+	public void updateTask(int index, ReadOnlyTask editedTask) {
+		assert editedTask != null;
 
-        Task taskToUpdate = internalList.get(index);
+		Task taskToUpdate = internalList.get(index);
 
-        taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated task.
-        // The right way is to implement observable properties in the Task class.
-        // Then, TaskCard should then bind its text labels to those observable properties.
-        internalList.set(index, taskToUpdate);
-    }
-    /**
-     * Marks the task as done in the list at position {@code index} with {@code editedTask}.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
-     */
-    public void completeTask(int index, ReadOnlyTask completedTask) {
-        assert completedTask != null;
+		taskToUpdate.resetData(editedTask);
+		// TODO: The code below is just a workaround to notify observers of the
+		// updated task.
+		// The right way is to implement observable properties in the Task
+		// class.
+		// Then, TaskCard should then bind its text labels to those observable
+		// properties.
+		internalList.set(index, taskToUpdate);
+	}
 
-        Task taskToUpdate = internalList.get(index);
+	/**
+	 * Marks the task as done in the list at position {@code index} with
+	 * {@code editedTask}.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if {@code index} < 0 or >= the size of the list.
+	 */
+	public void completeTask(int index, ReadOnlyTask completedTask) {
+		assert completedTask != null;
+		Task taskToUpdate = internalList.get(index);
+		taskToUpdate.markComplete(completedTask);
+		internalList.set(index, taskToUpdate);
+	}
 
-        taskToUpdate.markComplete(completedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated task.
-        // The right way is to implement observable properties in the Task class.
-        // Then, TaskCard should then bind its text labels to those observable properties.
-        internalList.set(index, taskToUpdate);
-        
-        System.out.print(taskToUpdate.toString());
-        
-    }
-    
-    /**
-     * Removes the equivalent task from the list.
-     *
-     * @throws taskNotFoundException if no such task could be found in the list.
-     */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
-        assert toRemove != null;
-        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
-        if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
-        }
-        return taskFoundAndDeleted;
-    }
+	/**
+	 * Removes the equivalent task from the list.
+	 *
+	 * @throws taskNotFoundException
+	 *             if no such task could be found in the list.
+	 */
+	public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+		assert toRemove != null;
+		final boolean taskFoundAndDeleted = internalList.remove(toRemove);
+		if (!taskFoundAndDeleted) {
+			throw new TaskNotFoundException();
+		}
+		return taskFoundAndDeleted;
+	}
 
-    public void setTasks(TaskList replacement) {
-        this.internalList.setAll(replacement.internalList);
-    }
+	public void setTasks(TaskList replacement) {
+		this.internalList.setAll(replacement.internalList);
+	}
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) {
-        final TaskList replacement = new TaskList();
-        for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
-        }
-        setTasks(replacement);
-    }
+	public void setTasks(List<? extends ReadOnlyTask> tasks) {
+		final TaskList replacement = new TaskList();
+		for (final ReadOnlyTask task : tasks) {
+			replacement.add(new Task(task));
+		}
+		setTasks(replacement);
+	}
 
-    public UnmodifiableObservableList<Task> asObservableList() {
-        return new UnmodifiableObservableList<>(internalList);
-    }
+	public UnmodifiableObservableList<Task> asObservableList() {
+		return new UnmodifiableObservableList<>(internalList);
+	}
 
-    @Override
-    public Iterator<Task> iterator() {
-        return internalList.iterator();
-    }
+	@Override
+	public Iterator<Task> iterator() {
+		return internalList.iterator();
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((TaskList) other).internalList));
-    }
+	@Override
+	public boolean equals(Object other) {
+		return other == this // short circuit if same object
+				|| (other instanceof TaskList // instanceof handles nulls
+						&& this.internalList.equals(((TaskList) other).internalList));
+	}
 
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return internalList.hashCode();
+	}
 
-    /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
-     */
-    public static class TaskNotFoundException extends Exception {}
+	/**
+	 * Signals that an operation targeting a specified person in the list would
+	 * fail because there is no such matching person in the list.
+	 */
+	public static class TaskNotFoundException extends Exception {
+	}
 
 }
