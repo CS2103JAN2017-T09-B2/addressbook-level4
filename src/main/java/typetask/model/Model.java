@@ -23,8 +23,8 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task);
-    
-    /** Marks the given task as completed 
+
+    /** Marks the given task as completed
      * @throws TaskNotFoundException */
     void completeTask(int index, ReadOnlyTask taskToComplete) throws TaskList.TaskNotFoundException;
 

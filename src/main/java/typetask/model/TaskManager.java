@@ -77,24 +77,17 @@ public class TaskManager implements ReadOnlyTaskManager {
             throw new TaskList.TaskNotFoundException();
         }
     }
-    
+
     public boolean completeTask(int index, ReadOnlyTask target) throws TaskList.TaskNotFoundException {
-//        if (tasks.remove(key)) {
-//            return true;
-//        } else {
-//            throw new TaskList.TaskNotFoundException();
-//        }
-    	
     	Task editedTask = new Task(target);
         tasks.completeTask(index, editedTask);
     	System.out.print("hello");
-    	
+
     	return false;
     }
 
 
 //// util methods
-
     @Override
     public String toString() {
         return tasks.asObservableList().size() + " tasks, ";
@@ -105,10 +98,10 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
-    
+
     public ObservableList<ReadOnlyTask> getIncompleteList(){
-    	FilteredList<Task> incompleteList =  new FilteredList<>(tasks.asObservableList().filtered(p -> p.getIsCompleted() == false));   	
-    	return new UnmodifiableObservableList<>(incompleteList);   	
+    	FilteredList<Task> incompleteList =  new FilteredList<>(tasks.asObservableList().filtered(p -> p.getIsCompleted() == false));
+    	return new UnmodifiableObservableList<>(incompleteList);
     }
 
     @Override

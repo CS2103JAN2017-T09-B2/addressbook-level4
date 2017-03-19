@@ -62,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
-    
+
     @Override
     public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.completeTask(index, target);
@@ -110,7 +110,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
-        String toString();
+        @Override
+		String toString();
     }
 
     private class PredicateExpression implements Expression {
@@ -134,7 +135,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
-        String toString();
+        @Override
+		String toString();
     }
 
     private class NameQualifier implements Qualifier {

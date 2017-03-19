@@ -63,13 +63,13 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD2:
             return new DeleteCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD3:
-            return new DeleteCommandParser().parse(arguments);           
-
+            return new DeleteCommandParser().parse(arguments);
+            
         case DoneCommand.COMMAND_WORD:
-            return new DoneCommandParser().parse(arguments);
+        	return new DoneCommandParser().parse(arguments);
         case DoneCommand.COMMAND_WORD2:
-            return new DoneCommandParser().parse(arguments);
-
+        	return new DoneCommandParser().parse(arguments);
+            
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
