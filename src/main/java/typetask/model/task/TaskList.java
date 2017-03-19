@@ -57,7 +57,25 @@ public class TaskList implements Iterable<Task> {
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
     }
+    /**
+     * Marks the task as done in the list at position {@code index} with {@code editedTask}.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void completeTask(int index, ReadOnlyTask completedTask) {
+        assert completedTask != null;
 
+        Task taskToUpdate = internalList.get(index);
+
+        taskToUpdate.markComplete(completedTask);
+        // TODO: The code below is just a workaround to notify observers of the updated task.
+        // The right way is to implement observable properties in the Task class.
+        // Then, TaskCard should then bind its text labels to those observable properties.
+        internalList.set(index, taskToUpdate);
+        
+        System.out.print(taskToUpdate.toString());
+        
+    }
+    
     /**
      * Removes the equivalent task from the list.
      *

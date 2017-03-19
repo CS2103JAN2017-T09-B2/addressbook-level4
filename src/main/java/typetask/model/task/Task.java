@@ -13,6 +13,7 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private DueDate date;
     private Time time;
+    private boolean isComplete;
 
     /**
      * Every field must be present and not null.
@@ -22,17 +23,26 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
     }
+    
     public Task(Name name, DueDate date, Time time) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.date = date;
         this.time = time;
     }
+    
+    public Task(Name name, DueDate date, Time time, boolean isComplete) {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.isComplete = isComplete;
+    }
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-       this(source.getName(), source.getDate(), source.getTime());
+       this(source.getName(), source.getDate(), source.getTime(), source.getIsCompleted());
     }
 
     public void setName(Name name) {
@@ -47,6 +57,11 @@ public class Task implements ReadOnlyTask {
     public void setTime(Time time) {
         this.time = time;
     }
+    
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+    
     @Override
     public Name getName() {
         return name;
@@ -59,6 +74,10 @@ public class Task implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
+    
+    public boolean getIsCompleted() {
+        return isComplete;
+    }
 
     /**
      * Updates this task with the details of {@code replacement}.
@@ -69,7 +88,12 @@ public class Task implements ReadOnlyTask {
         this.setDate(replacement.getDate());
         this.setTime(replacement.getTime());
     }
-
+    
+    public void markComplete(ReadOnlyTask complete) {
+        assert complete != null;
+        this.setIsComplete(true);
+    }
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

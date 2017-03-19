@@ -13,6 +13,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private DueDate date;
     private Time time;
+    private boolean isComplete;
 
     public TestTask() {
     }
@@ -35,6 +36,10 @@ public class TestTask implements ReadOnlyTask {
     public void setDate(DueDate date) {
         this.date = date;
     }
+    
+    public boolean setIsCompleted() {
+        return isComplete;
+    }
 
 
     @Override
@@ -48,6 +53,10 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Time getTime() {
         return time;
+    }
+    @Override
+    public boolean getIsCompleted() {
+        return isComplete;
     }
     @Override
     public String toString() {
