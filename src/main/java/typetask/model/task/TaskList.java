@@ -47,7 +47,7 @@ public class TaskList implements Iterable<Task> {
 	/**
 	 * Updates the task in the list at position {@code index} with
 	 * {@code editedTask}.
-	 * 
+	 *
 	 * @throws IndexOutOfBoundsException
 	 *             if {@code index} < 0 or >= the size of the list.
 	 */
@@ -69,7 +69,7 @@ public class TaskList implements Iterable<Task> {
 	/**
 	 * Marks the task as done in the list at position {@code index} with
 	 * {@code editedTask}.
-	 * 
+	 *
 	 * @throws IndexOutOfBoundsException
 	 *             if {@code index} < 0 or >= the size of the list.
 	 */
