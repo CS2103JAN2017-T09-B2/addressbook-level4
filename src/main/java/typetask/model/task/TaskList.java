@@ -69,11 +69,11 @@ public class TaskList implements Iterable<Task> {
         if (internalIndex > -1) {
             Task taskToUpdate = internalList.get(internalIndex);
             taskToUpdate.markComplete(completedTask);
-            internalList.set(internalIndex, taskToUpdate);  
+            internalList.set(internalIndex, taskToUpdate);
         }
         else {
             throw new TaskNotFoundException();
-        }  
+        }
     }
 
     private int findInternalIndex(ReadOnlyTask completedTask) {

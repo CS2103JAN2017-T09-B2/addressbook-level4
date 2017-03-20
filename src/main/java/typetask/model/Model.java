@@ -24,7 +24,7 @@ public interface Model {
     void addTask(Task task);
 
     /** Marks a given task as completed*/
-    void completeTask(int index, ReadOnlyTask taskToComplete) throws TaskList.TaskNotFoundException; 
+    void completeTask(int index, ReadOnlyTask taskToComplete) throws TaskList.TaskNotFoundException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
