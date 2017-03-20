@@ -1,6 +1,7 @@
 package typetask.logic.parser;
 
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Optional;
 
 import typetask.logic.commands.Command;
