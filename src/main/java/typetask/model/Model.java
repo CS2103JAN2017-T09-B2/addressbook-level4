@@ -6,6 +6,7 @@ import typetask.commons.core.UnmodifiableObservableList;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 import typetask.model.task.TaskList;
+import typetask.model.task.TaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -22,6 +23,10 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task);
+
+    /** Marks the given task as completed
+     * @throws TaskNotFoundException */
+    void completeTask(int index, ReadOnlyTask taskToComplete) throws TaskList.TaskNotFoundException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.

@@ -10,6 +10,7 @@ import typetask.logic.commands.AddCommand;
 import typetask.logic.commands.ClearCommand;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.DeleteCommand;
+import typetask.logic.commands.DoneCommand;
 import typetask.logic.commands.EditCommand;
 import typetask.logic.commands.ExitCommand;
 import typetask.logic.commands.FindCommand;
@@ -23,17 +24,18 @@ import typetask.logic.commands.SelectCommand;
  */
 public class Parser {
 
-    /**
-     * Used for initial separation of command word and args.
-     */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+	/**
+	 * Used for initial separation of command word and args.
+	 */
+	private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    /**
-     * Parses user input into command for execution.
-     *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     */
+	/**
+	 * Parses user input into command for execution.
+	 *
+	 * @param userInput
+	 *            full user input string
+	 * @return the command based on the user input
+	 */
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -43,49 +45,52 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+            case AddCommand.COMMAND_WORD:
+                return new AddCommandParser().parse(arguments);
+            case AddCommand.COMMAND_WORD2:
+                return new AddCommandParser().parse(arguments);
+            case AddCommand.COMMAND_WORD3:
+                return new AddCommandParser().parse(arguments);
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-        case AddCommand.COMMAND_WORD2:
-            return new AddCommandParser().parse(arguments);
-        case AddCommand.COMMAND_WORD3:
-            return new AddCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD2:
+                return new DeleteCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD3:
+                return new DeleteCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-        case DeleteCommand.COMMAND_WORD2:
-            return new DeleteCommandParser().parse(arguments);
-        case DeleteCommand.COMMAND_WORD3:
-            return new DeleteCommandParser().parse(arguments);
+            case DoneCommand.COMMAND_WORD:
+                return new DoneCommandParser().parse(arguments);
+            case DoneCommand.COMMAND_WORD2:
+                return new DoneCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-        case FindCommand.COMMAND_WORD2:
-            return new FindCommandParser().parse(arguments);
-        case FindCommand.COMMAND_WORD3:
-            return new FindCommandParser().parse(arguments);
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
+            case FindCommand.COMMAND_WORD2:
+                return new FindCommandParser().parse(arguments);
+            case FindCommand.COMMAND_WORD3:
+                return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        default:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
-
+            default:
+                return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+         }
+	}
 }
