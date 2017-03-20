@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import typetask.commons.core.UnmodifiableObservableList;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -77,6 +78,15 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    /**
+     * Marks a task in TypeTask as complete.
+     *
+     */
+    public boolean completeTask(ReadOnlyTask target) throws TaskList.TaskNotFoundException {
+        Task editedTask = new Task(target);
+        tasks.completeTask(editedTask);
+        return false;
+    }
 
 //// util methods
 
@@ -89,6 +99,11 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+
+    public ObservableList<ReadOnlyTask> getIncompleteList() {
+        FilteredList<Task> incompleteList = new FilteredList<>(tasks.asObservableList().filtered(p -> p.getIsCompleted() == false));
+        return new UnmodifiableObservableList<>(incompleteList);
     }
 
     @Override
