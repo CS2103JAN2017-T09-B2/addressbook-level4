@@ -47,7 +47,7 @@ public class DoneCommandTest extends AddressBookGuiTest {
         boolean isTestCompleted = TaskToComplete.getIsCompleted();
 
         commandBox.runCommand("done " + targetIndexOneIndexed);
-        
+
         //confirm the task is completed 
         assertTrue(isTestCompleted);
 
