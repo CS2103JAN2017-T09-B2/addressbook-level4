@@ -17,7 +17,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="105.0" prefHeight="105.0" prefWidth="185.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -38,10 +38,11 @@
                         <FlowPane fx:id="tags" />
                   <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
                   <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+                  <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
+                  <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                     </children>
                 </VBox>
             </children>
-
         </GridPane>
     </children>
 </HBox>

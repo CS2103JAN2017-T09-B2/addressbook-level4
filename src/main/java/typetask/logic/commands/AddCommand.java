@@ -1,9 +1,11 @@
 package typetask.logic.commands;
 
 
+
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.task.DueDate;
+import typetask.model.task.EventTask;
 import typetask.model.task.Name;
 import typetask.model.task.Task;
 import typetask.model.task.Time;
@@ -23,7 +25,8 @@ public class AddCommand extends Command {
             + "Parameters: NAME d/DATE t/TIME\n"
             + "Example: " + COMMAND_WORD
             + " Read Harry Potter book 1 ";
-
+    public static final String EVENT_MESSAGE_USAGE = COMMAND_WORD
+            + ": Event must have both start and end date.";
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 
     private final Task toAdd;
@@ -51,6 +54,10 @@ public class AddCommand extends Command {
     public AddCommand(String name, String time, int noDate)
             throws IllegalValueException {
         this.toAdd = new Task(new Name(name), new DueDate(""), new Time(time));
+    }
+    public AddCommand(String name, String startDate, String endDate, int eventTask)
+            throws IllegalValueException {
+        this.toAdd = new EventTask(new Name(name),new DueDate(startDate), new DueDate(endDate),false);
     }
     @Override
     public CommandResult execute() throws CommandException {
