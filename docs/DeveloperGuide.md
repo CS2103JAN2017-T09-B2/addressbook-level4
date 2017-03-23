@@ -254,7 +254,7 @@ _Figure 3.4.1 : Structure of the Model Component_
 The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Type Task data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -272,12 +272,12 @@ _Figure 3.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Type Task data in xml format and read it back.
 ```
 
 ### 3.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.typetask.commons` package.
 &nbsp;
 
 ## 4. Implementation
