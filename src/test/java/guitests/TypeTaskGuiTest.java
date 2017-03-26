@@ -30,7 +30,7 @@ import typetask.testutil.TestUtil;
 import typetask.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for TypeTask.
  */
 public abstract class TypeTaskGuiTest {
 

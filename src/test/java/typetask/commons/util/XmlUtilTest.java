@@ -21,8 +21,8 @@ public class XmlUtilTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlUtilTest/");
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
-    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validAddressBook.xml");
-    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
+    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTypeTask.xml");
+    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTypeTask.xml"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -53,8 +53,8 @@ public class XmlUtilTest {
 
   //  @Test (Need to create a valid file to test. New Valid file will replace old VALID_FILE
  //   public void getDataFromFile_validFile_validResult() throws Exception {
- //       XmlSerializableAddressBook dataFromFile =
-    //XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class);
+ //       XmlSerializableTypeTask dataFromFile =
+    //XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableTypeTask.class);
  //       assertEquals(0, dataFromFile.getTaskList().size());
  //   }
 

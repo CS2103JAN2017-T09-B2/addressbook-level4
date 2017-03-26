@@ -109,7 +109,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTypeTask(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -126,7 +126,7 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+    public static XmlSerializableTaskManager generateSampleStorageTypeTask() {
         return new XmlSerializableTaskManager(new TaskManager());
     }
 
