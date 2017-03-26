@@ -200,7 +200,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void loadTaskPage(ReadOnlyTask task) {
-//        browserPanel.loadTaskPage(person);
+//        browserPanel.loadTaskPage(task);
     }
 
     void releaseResources() {

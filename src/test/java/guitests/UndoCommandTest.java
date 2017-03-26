@@ -14,7 +14,7 @@ public class UndoCommandTest extends TypeTaskGuiTest {
     @Test
     public void undo() {
         //undo clear command
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         commandBox.runCommand("clear");
         assertListSize(0);
         assertUndoSuccess();
@@ -22,25 +22,25 @@ public class UndoCommandTest extends TypeTaskGuiTest {
         //undo delete command
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
-        TestTask personToDelete = currentList[targetIndex - 1]; // -1 as array uses zero indexing
+        TestTask taskToDelete = currentList[targetIndex - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndex);
         commandBox.runCommand("delete " + targetIndex);
-        //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        //confirm the list now contains all previous tasks except the deleted task
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
         assertUndoSuccess();
 
         //undo add command
-        //add one person
-        TestTask personToAdd = td.hoon;
-        commandBox.runCommand(personToAdd.getAddCommand());
+        //add one task
+        TestTask taskToAdd = td.hoon;
+        commandBox.runCommand(taskToAdd.getAddCommand());
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = personListPanel.navigateToTask(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
-        //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        assertMatching(taskToAdd, addedCard);
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
         assertUndoSuccess();
 
 
@@ -48,6 +48,6 @@ public class UndoCommandTest extends TypeTaskGuiTest {
     }
     private void assertUndoSuccess() {
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
     }
 }
