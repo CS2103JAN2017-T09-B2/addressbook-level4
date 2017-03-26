@@ -230,7 +230,7 @@ The `Logic` component,
 
 * `Logic` uses the `Parser` class to parse the user command.
 * This results in a `Command` object which is executed by the `LogicManager`.
-* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+* The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
 
