@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -49,7 +49,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
 
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
@@ -67,7 +67,7 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Task[] getSamplePersonData() {
+    private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
@@ -89,7 +89,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSamplePersonData() {
+    public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
@@ -267,10 +267,10 @@ public class TestUtil {
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestTask[] removePersonsFromList(final TestTask[] persons, TestTask... personsToRemove) {
-        List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    public static TestTask[] removeTasksFromList(final TestTask[] persons, TestTask... personsToRemove) {
+        List<TestTask> listOfTasks = asList(persons);
+        listOfTasks.removeAll(asList(personsToRemove));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
 
@@ -279,8 +279,8 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removePersonFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
-        return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
@@ -290,7 +290,7 @@ public class TestUtil {
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
+    public static TestTask[] replaceTaskFromList(TestTask[] persons, TestTask person, int index) {
         persons[index] = person;
         return persons;
     }
@@ -301,10 +301,10 @@ public class TestUtil {
      * @param personsToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestTask[] addPersonsToList(final TestTask[] persons, TestTask... personsToAdd) {
-        List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    public static TestTask[] addTasksToList(final TestTask[] persons, TestTask... personsToAdd) {
+        List<TestTask> listOfTasks = asList(persons);
+        listOfTasks.addAll(asList(personsToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -315,8 +315,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask person) {
+        return card.isSameTask(person);
     }
 
 

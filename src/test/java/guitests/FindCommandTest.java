@@ -7,7 +7,7 @@ import org.junit.Test;
 import typetask.commons.core.Messages;
 import typetask.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TypeTaskGuiTest {
 
     @Test
     public void find_nonEmptyList() {

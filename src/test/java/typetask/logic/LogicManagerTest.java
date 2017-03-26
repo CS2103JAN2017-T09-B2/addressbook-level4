@@ -196,7 +196,7 @@ public class LogicManagerTest {
     //}
 
     //@Test
-    //public void execute_add_invalidPersonData() {
+    //public void execute_add_invalidTaskData() {
         //assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 //Name.MESSAGE_NAME_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
@@ -416,7 +416,7 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Name("Person " + seed));
+                    new Name("Task " + seed));
         }
 
         /** Generates the correct add command based on the task given */

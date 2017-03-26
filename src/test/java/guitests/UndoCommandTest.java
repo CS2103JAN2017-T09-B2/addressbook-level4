@@ -4,12 +4,12 @@ import static typetask.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import typetask.testutil.TestTask;
 import typetask.testutil.TestUtil;
 
 
-public class UndoCommandTest extends AddressBookGuiTest {
+public class UndoCommandTest extends TypeTaskGuiTest {
 
     @Test
     public void undo() {
@@ -23,7 +23,7 @@ public class UndoCommandTest extends AddressBookGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         TestTask personToDelete = currentList[targetIndex - 1]; // -1 as array uses zero indexing
-        TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndex);
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndex);
         commandBox.runCommand("delete " + targetIndex);
         //confirm the list now contains all previous persons except the deleted person
         assertTrue(personListPanel.isListMatching(expectedRemainder));
@@ -36,10 +36,10 @@ public class UndoCommandTest extends AddressBookGuiTest {
         TestTask personToAdd = td.hoon;
         commandBox.runCommand(personToAdd.getAddCommand());
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
+        TaskCardHandle addedCard = personListPanel.navigateToTask(personToAdd.getName().fullName);
         assertMatching(personToAdd, addedCard);
         //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, personToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
         assertUndoSuccess();
 

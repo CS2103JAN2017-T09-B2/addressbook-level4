@@ -4,12 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import typetask.commons.core.Messages;
 import typetask.testutil.TestTask;
 import typetask.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TypeTaskGuiTest {
 
     @Test
     public void add() {
@@ -17,12 +17,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another person
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
 
         //add to empty list
@@ -38,11 +38,11 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
+        TaskCardHandle addedCard = personListPanel.navigateToTask(personToAdd.getName().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, personToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 
