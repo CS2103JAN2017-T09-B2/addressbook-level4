@@ -6,7 +6,7 @@ import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Time;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 

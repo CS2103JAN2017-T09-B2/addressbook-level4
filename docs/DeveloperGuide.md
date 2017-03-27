@@ -172,7 +172,7 @@ interface and exposes its functionality using the `LogicManager.java` class. <br
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 
 _Figure 3.1.1a : Component interactions for `delete 1` command (part 1)_
 
@@ -182,7 +182,7 @@ _Figure 3.1.1a : Component interactions for `delete 1` command (part 1)_
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 
 _Figure 3.1.1b : Component interactions for `delete 1` command (part 2)_
 
@@ -201,7 +201,7 @@ _Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -230,14 +230,14 @@ The `Logic` component,
 
 * `Logic` uses the `Parser` class to parse the user command.
 * This results in a `Command` object which is executed by the `LogicManager`.
-* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+* The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
  
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 
 _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
@@ -255,7 +255,7 @@ The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 ```
@@ -862,7 +862,7 @@ Pros:
 
 * Supports displaying tasks in different views. Users are able to use multiple views
 * Supports setting notification for tasks. Users are able to set notification timing for specific tasks
-* Supports syncing with multiple calendars (Personal + Shared Calendars). Users are able to see tasks/events from multiple calendars in 1 page
+* Supports syncing with multiple calendars (Taskal + Shared Calendars). Users are able to see tasks/events from multiple calendars in 1 page
 * Supports sharing of calendars. Users are able to share their calendars with other users
 * Supports integration with smartphones. Users are able to view the tasks from any devices
 * Supports unique holidays calendar, e.g. Holidays in Singapore. Users are able to check on the holidays of the countries they are visiting

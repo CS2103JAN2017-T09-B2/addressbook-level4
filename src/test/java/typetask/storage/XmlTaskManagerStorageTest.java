@@ -19,7 +19,7 @@ import typetask.model.task.Task;
 import typetask.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTypeTaskStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -52,7 +52,7 @@ public class XmlTaskManagerStorageTest {
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readTaskManager("NotXmlFormatAddressBook.xml");
+        readTaskManager("NotXmlFormatTypeTask.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -61,7 +61,7 @@ public class XmlTaskManagerStorageTest {
 
     @Test
     public void readAndSaveTaskManager_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String filePath = testFolder.getRoot().getPath() + "TempTypeTask.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
