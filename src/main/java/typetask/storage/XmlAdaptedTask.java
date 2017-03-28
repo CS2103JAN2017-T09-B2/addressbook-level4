@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 /**
@@ -22,6 +23,8 @@ public class XmlAdaptedTask {
     private Boolean isCompleted;
     @XmlElement(required = true)
     private String endDate;
+    @XmlElement(required = true)
+    private String priority;
 
 
     /**
@@ -46,6 +49,7 @@ public class XmlAdaptedTask {
         }
 
         isCompleted = source.getIsCompleted();
+        priority = source.getPriority().value;
     }
 
     /**
@@ -57,10 +61,11 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final DueDate date = new DueDate(this.date);
         final DueDate endDate = new DueDate(this.endDate);
+        final Priority priority = new Priority(this.priority);
         boolean isCompleted = false;
         if (this.isCompleted != null) {
             isCompleted = this.isCompleted;
         }
-        return new Task(name, date, endDate, isCompleted);
+        return new Task(name, date, endDate, isCompleted, priority);
     }
 }
