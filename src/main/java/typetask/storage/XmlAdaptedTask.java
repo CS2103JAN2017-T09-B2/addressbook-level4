@@ -48,8 +48,13 @@ public class XmlAdaptedTask {
             endDate = "";
         }
 
+        if (source.getPriority() != null) {
+            priority = source.getPriority().value;
+        } else {
+            priority = "";
+        }
+
         isCompleted = source.getIsCompleted();
-        priority = source.getPriority().value;
     }
 
     /**
