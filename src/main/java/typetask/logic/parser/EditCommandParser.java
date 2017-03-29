@@ -62,7 +62,7 @@ public class EditCommandParser {
                 editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
             }
             if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
-                Optional<String> parsePriority= Optional.of(getPriority(argsTokenizer.getValue(PREFIX_PRIORITY).get()));
+                Optional<String> parsePriority = Optional.of(getPriority(argsTokenizer.getValue(PREFIX_PRIORITY).get()));
                 editTaskDescriptor.setPriority(ParserUtil.parsePriority(parsePriority));
             }
         } catch (IllegalValueException ive) {
