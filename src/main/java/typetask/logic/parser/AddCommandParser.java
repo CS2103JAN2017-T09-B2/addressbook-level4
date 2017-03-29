@@ -26,8 +26,7 @@ public class AddCommandParser {
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
     private final int priorityTask = 4;
-    
-    private static final String NO_STRING = "";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -61,12 +60,9 @@ public class AddCommandParser {
                         null,
                         argsTokenizer.getValue(PREFIX_PRIORITY).get()
                         );
-            } 
-            else {
+            } else {
                 return new AddCommand(
-                        argsTokenizer.getPreamble().get(),
-                        verifyEmpty(argsTokenizer.getValue(PREFIX_PRIORITY))
-                        );
+                        argsTokenizer.getPreamble().get());
             }
 
         } catch (NoSuchElementException nsee) {
@@ -100,12 +96,4 @@ public class AddCommandParser {
         return finalizedDate;
     }
 
-    //@@author A0144902L
-    private String verifyEmpty(Optional<String> value) throws IllegalValueException {
-        try {
-            return value.get();
-        } catch (NoSuchElementException nsee) {
-            return NO_STRING;
-        }
-    }
 }
