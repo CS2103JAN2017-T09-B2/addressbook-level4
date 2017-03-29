@@ -10,7 +10,6 @@ import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.AddCommand;
@@ -32,7 +31,7 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
+        ArgumentTokenizer argsTokenizer = 
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         try {
