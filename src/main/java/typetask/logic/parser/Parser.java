@@ -17,6 +17,9 @@ import typetask.logic.commands.FindCommand;
 import typetask.logic.commands.HelpCommand;
 import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.ListCommand;
+import typetask.logic.commands.ListDoneCommand;
+import typetask.logic.commands.RedoCommand;
+import typetask.logic.commands.RemoveDeadlineCommand;
 import typetask.logic.commands.SaveCommand;
 import typetask.logic.commands.SelectCommand;
 import typetask.logic.commands.SettingCommand;
@@ -87,12 +90,16 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListDoneCommand.COMMAND_WORD:
+            return new ListDoneCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        //@@author A0140010M
         case UseCommand.COMMAND_WORD:
             return new UseCommandParser().parse(arguments);
 
@@ -102,9 +109,17 @@ public class Parser {
         case SettingCommand.COMMAND_WORD:
             return new SettingCommandParser().parse(arguments);
 
-
+        //@@author A0139926R
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommandParser().parse(arguments);
+        case RedoCommand.COMMAND_WORD_SHORT:
+            return new RedoCommandParser().parse(arguments);
+        case RemoveDeadlineCommand.COMMAND_WORD:
+            return new RemoveDeadlineCommandParser().parse(arguments);
+        case RemoveDeadlineCommand.COMMAND_WORD_SHORT:
+            return new RemoveDeadlineCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

@@ -63,10 +63,19 @@ public class TestTask implements ReadOnlyTask {
     public boolean getIsCompleted() {
         return isCompleted;
     }
+
     //@@author A0144902L
     @Override
     public Priority getPriority() {
         return priority;
+
+    //@@author A0139154E
+    public String getIsCompletedToString() {
+        if (isCompleted) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
     @Override
     public String toString() {

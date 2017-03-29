@@ -25,7 +25,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX [NAME] [by:DATE] [@TIME] \n"
             + "Example: " + COMMAND_WORD + " 1 by:9/11/2017 @11:25pm ";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited TASK: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final int filteredTaskListIndex;
@@ -44,7 +44,7 @@ public class EditCommand extends Command {
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
-
+    //@@author A0139926R
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -52,12 +52,12 @@ public class EditCommand extends Command {
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-      //@@author A0139926R
+
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         model.storeTaskManager(COMMAND_WORD);
         model.updateTask(filteredTaskListIndex, editedTask);
-        model.updateFilteredListToShowAll();
+        model.updateFilteredTaskList(false);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
   //@@author A0139926R

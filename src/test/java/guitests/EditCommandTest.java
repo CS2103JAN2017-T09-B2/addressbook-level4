@@ -16,10 +16,10 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedPersonsList = td.getTypicalTasks();
+    private TestTask[] expectedPersonsList = td.getTypicalTasks();
 
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
+    public void editAllFieldsSpecifiedSuccess() throws Exception {
         String detailsToEdit = "Bobby ";
         int addressBookIndex = 1;
 
@@ -30,7 +30,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
+    public void editNotAllFieldsSpecifiedSuccess() throws Exception {
         String detailsToEdit = "by:10/10/1993";
         int addressBookIndex = 2;
 
@@ -44,7 +44,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
+    public void editFindThenEditSuccess() throws Exception {
         commandBox.runCommand("find Elle");
 
         String detailsToEdit = "Belle";
@@ -59,19 +59,19 @@ public class EditCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void edit_missingPersonIndex_failure() {
+    public void editMissingPersonIndexFailure() {
         commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_invalidPersonIndex_failure() {
+    public void editInvalidPersonIndexFailure() {
         commandBox.runCommand("edit 8 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
-    public void edit_noFieldsSpecified_failure() {
+    public void editNoFieldsSpecifiedFailure() {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }

@@ -8,17 +8,18 @@ import typetask.logic.commands.exceptions.CommandException;
 import typetask.storage.XmlFileStorage;
 import typetask.storage.XmlSerializableTaskManager;
 
+//@@author A0140010M
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-            + ": Saves/Create a copy of the file to a specify location\n"
+            + ": Saves/Creates a copy of the file to a specified location\n"
             + "Parameters: FilePath\n"
             + "Example: " + COMMAND_WORD
             + " c:\\desktop\\ ";
     public static final String MESSAGE_SUCCESS = "A copy of the file is saved.";
 
-    String path;
+    private String path;
 
     public SaveCommand (String filePath) {
         this.path = FileUtil.getPath(filePath) + "/taskManager.xml";

@@ -42,9 +42,11 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
+    //@@author A0139926R
     public void setDate(DueDate date) {
         this.date = date;
     }
+    //@@author A0139926R
     public void setEndDate(DueDate endDate) {
         this.endDate = endDate;
     }
@@ -63,10 +65,12 @@ public class Task implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
+    //@@author A0139926R
     @Override
     public DueDate getDate() {
         return date;
     }
+    //@@author A0139926R
     @Override
     public DueDate getEndDate() {
         return endDate;
@@ -76,11 +80,22 @@ public class Task implements ReadOnlyTask {
     public boolean getIsCompleted() {
         return isCompleted;
     }
+
     //@@author A0144902L
     @Override
     public Priority getPriority() {
         return priority;
     }
+
+    //@@author A0139154E
+    public String getIsCompletedToString() {
+        if (isCompleted) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+    //@@author
 
     /**
      * Updates this task with the details of {@code replacement}.

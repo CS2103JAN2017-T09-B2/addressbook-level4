@@ -3,6 +3,9 @@ package typetask.ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,13 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import typetask.logic.parser.DateParser;
 import typetask.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
     private static final String PRIORITY = "/images/yellow_exclamation_mark.png";
-    private static final String DONE = "/images/green_tick.png";
     public static final String OVERDUE_STYLE_CLASS = "overdue";
     public static final String PENDING_STYLE_CLASS = "pending";
     public static final String PRIORITY_STYLE_CLASS = "priority";
@@ -41,7 +44,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Pane colourTag;
     @FXML
-    private ImageView priorityOrDone;
+    private ImageView priorityMark;
 
     private LocalDateTime now = LocalDateTime.now();
     private LocalDate nowDate = now.toLocalDate();
@@ -49,10 +52,8 @@ public class TaskCard extends UiPart<Region> {
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(inputPattern);
     // NOTE: only instantiated for non-floating task
     private LocalDate parsedDate;
-    private boolean completed = false;
     private boolean parsedDateFlag = false;
     private Image priority = new Image(PRIORITY);
-    private Image done = new Image(DONE);
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -60,17 +61,41 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
         endDate.setText(task.getEndDate().value);
-        completed = task.getIsCompleted();
-//        if (!task.getDate().value.equals("")) {
-//            parsedDateFlag = true;
-//            parsedDate = LocalDate.parse(task.getDate().value, dtf);
-//        }
+        setStatusForEventTask(task);
+        setStatusForDeadlineTask(task);
         setColourCode();
-        setImagestoIndicatePriorityOrComplete();
-        //add endDate.setText(...);
-        //add setImages...
+//        setImageToIndicatePriority();
     }
-
+    //@@author A0139926R
+    //Checks event task status. Uses endDate to check
+    private void setStatusForEventTask(ReadOnlyTask task) {
+        if (!task.getEndDate().value.equals("")) {
+            List<Date> dates = DateParser.parse(task.getEndDate().value);
+            Date taskDeadline = dates.get(0);
+            Calendar calendar = Calendar.getInstance();
+            Date nowDate = calendar.getTime();
+            if (nowDate.after(taskDeadline)) {
+                setStyleToIndicateOverdue();
+            } else {
+                setStyleToIndicatePending();
+            }
+        }
+    }
+    //@@author A0139926R
+    //Checks deadline task status. Uses date to check
+    private void setStatusForDeadlineTask(ReadOnlyTask task) {
+        if (!task.getDate().value.equals("")) {
+            List<Date> dates = DateParser.parse(task.getDate().value);
+            Date taskDeadline = dates.get(0);
+            Calendar calendar = Calendar.getInstance();
+            Date nowDate = calendar.getTime();
+            if (nowDate.after(taskDeadline)) {
+                setStyleToIndicateOverdue();
+            } else {
+                setStyleToIndicatePending();
+            }
+        }
+    }
     //@@author A0139154E
     private void setColourCode() {
         if (parsedDateFlag == true) {
@@ -93,21 +118,8 @@ public class TaskCard extends UiPart<Region> {
     }
 
     //@@author A0139154E
-    private void setImagestoIndicatePriorityOrComplete() {
-        if (completed == true) {
-            setImageToIndicateCompleted();
-        }
-    }
-
-    //@@author A0139154E
     private void setImageToIndicatePriority() {
-        priorityOrDone.setImage(priority);
+        priorityMark.setImage(priority);
     }
-
-    //@@author A0139154E
-    private void setImageToIndicateCompleted() {
-        priorityOrDone.setImage(done);
-    }
-
 
 }

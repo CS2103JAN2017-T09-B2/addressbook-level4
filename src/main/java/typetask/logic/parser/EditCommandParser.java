@@ -23,7 +23,7 @@ import typetask.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-
+    //@@author A0139926R
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -32,7 +32,8 @@ public class EditCommandParser {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE,
-                        PREFIX_END_DATE, PREFIX_END_TIME, PREFIX_PRIORITY);
+                        PREFIX_END_DATE, PREFIX_PRIORITY);
+
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -40,14 +41,16 @@ public class EditCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-      //@@author A0139926R
+
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
   //editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
+                Optional<String> emptyString = Optional.of("");
                 editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
+                editTaskDescriptor.setEndDate(ParserUtil.parseDate(emptyString));
             }
             if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_TIME).get()));

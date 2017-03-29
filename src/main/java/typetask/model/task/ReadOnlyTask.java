@@ -8,10 +8,15 @@ package typetask.model.task;
 public interface ReadOnlyTask {
 
     Name getName();
+    //@@author A0139926R
     DueDate getDate();
     DueDate getEndDate();
+    //@@author A0144902L
     Priority getPriority();
     boolean getIsCompleted();
+    //@@author A0139154E
+    String getIsCompletedToString();
+    //@@author
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -25,16 +30,22 @@ public interface ReadOnlyTask {
     /**
      * Formats the task as text, showing all the task details.
      */
+    //@@author A0139154E
+    //edited for friendlier UI
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-               .append(" DueDate: ")
+               .append("\nDetails: \nStart On:")
                .append(getDate())
-               .append(" Completed: ")
-               .append(getIsCompleted())
+               .append("\nEnds On: ")
+               .append(getEndDate())
+               .append(" \nCompleted? ")
+               .append(getIsCompletedToString())
                .append(" Priority: ")
                .append(getPriority());
+      
         return builder.toString();
     }
+    //@@author
 
 }

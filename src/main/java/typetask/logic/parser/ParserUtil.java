@@ -71,16 +71,8 @@ public class ParserUtil {
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
 
-//    /**
-//     * Parses a {@code Optional<String> phone} into an {@code Optional<Date>} if {@code phone} is present.
-//     */
-//    public static Optional<DueDate> parsePhone(Optional<String> phone) throws IllegalValueException {
-//        assert phone != null;
-//        return phone.isPresent() ? Optional.of(new DueDate(phone.get())) : Optional.empty();
-//    }
-
     /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<DueDate>} if {@code date} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
     public static Optional<DueDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
