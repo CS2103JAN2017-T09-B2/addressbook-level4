@@ -12,36 +12,33 @@ public class Priority {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
             + " the words Yes and No (case-insensitive) or the letters y(Y) and n(N)";
     
-    public static final String HIGH_PRIORITY= "High priority";
-    public static final String NO_PRIORITY = "No priority";
-    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N)$";
+    public static final String HIGH_PRIORITY= "High";
+    public static final String LOW_PRIORITY = "Low";
+    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N|High|Low)$";
     
     public final String value;
-    public final String priority;
 
     /**
      * Validates given priority.
      *
      * @throws IllegalValueException if given priority level string is invalid.
      */
-    public Priority(String priorityLevel) throws IllegalValueException {
-        assert priorityLevel != null;
+    public Priority(String priority) throws IllegalValueException {
+        assert priority != null;
 
-        String trimmedPriorityLevel = priorityLevel.trim();
+        String trimmedPriorityLevel = priority.trim();
 
-        if ("".equals(priorityLevel)) {
-            this.value = NO_PRIORITY ;
-            this.priority = "No";
+        if ("".equals(priority)) {
+            this.value = LOW_PRIORITY;
         } else {
             if (!isValidPriority(trimmedPriorityLevel)) {
                 throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
             }
-            if (trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
-                this.value = NO_PRIORITY ;
-                this.priority = "Yes";
+            if (trimmedPriorityLevel.contains("H") || 
+                    trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
+                this.value = HIGH_PRIORITY;
             } else {
-                this.value = NO_PRIORITY ;
-                this.priority = "No";
+                this.value = LOW_PRIORITY;
             }
         }
     }

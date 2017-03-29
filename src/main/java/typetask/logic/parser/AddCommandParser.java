@@ -25,6 +25,8 @@ public class AddCommandParser {
     private final int deadlineTaskWithTime = 1;
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
+    private final int priorityTask = 4;
+    
     private static final String NO_STRING = "";
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -52,7 +54,15 @@ public class AddCommandParser {
                         argsTokenizer.getPreamble().get(),
                         getDate(argsTokenizer.getValue(PREFIX_TIME).get())
                         );
-            } else {
+            } else if (taskType == priorityTask) {
+                return new AddCommand(
+                        argsTokenizer.getPreamble().get(),
+                        null,
+                        null,
+                        argsTokenizer.getValue(PREFIX_PRIORITY).get()
+                        );
+            } 
+            else {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         verifyEmpty(argsTokenizer.getValue(PREFIX_PRIORITY))
@@ -74,6 +84,8 @@ public class AddCommandParser {
             return deadlineTaskWithDate;
         } else if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
             return deadlineTaskWithTime;
+        } else if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
+            return priorityTask;
         } else {
             return floatingTask;
         }
