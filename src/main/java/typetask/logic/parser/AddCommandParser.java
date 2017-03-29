@@ -3,12 +3,14 @@ package typetask.logic.parser;
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.AddCommand;
@@ -23,13 +25,14 @@ public class AddCommandParser {
     private final int deadlineTaskWithTime = 1;
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
+    private static final String EMPTY_STRING = "";
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         try {
             int taskType = checkTaskType(argsTokenizer);
@@ -51,7 +54,8 @@ public class AddCommandParser {
                         );
             } else {
                 return new AddCommand(
-                        argsTokenizer.getPreamble().get()
+                        argsTokenizer.getPreamble().get(),
+                        verifyEmpty(argsTokenizer.getValue(PREFIX_PRIORITY))
                         );
             }
 
@@ -82,5 +86,14 @@ public class AddCommandParser {
         String finalizedDate = splitDate[0] + " " + splitDate[1] + " " + splitDate[2] +
                 " " + splitDate[3];
         return finalizedDate;
+    }
+
+    //@@author A0144902L
+    private String verifyEmpty(Optional<String> value) throws IllegalValueException {
+        try {
+            return value.get();
+        } catch (NoSuchElementException nsee) {
+            return EMPTY_STRING;
+        }
     }
 }

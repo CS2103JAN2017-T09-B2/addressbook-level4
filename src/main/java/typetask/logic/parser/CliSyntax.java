@@ -10,8 +10,7 @@ import typetask.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
+    public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_DATE = new Prefix("by:");
     public static final Prefix PREFIX_TIME = new Prefix("@");
     public static final Prefix PREFIX_START_DATE = new Prefix("from:");
