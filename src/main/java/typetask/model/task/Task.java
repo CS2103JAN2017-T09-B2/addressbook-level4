@@ -26,6 +26,7 @@ public class Task implements ReadOnlyTask {
         this.date = date;
         this.endDate = endDate;
         this.priority = priority;
+        this.isCompleted = isCompleted;
     }
 
     /**

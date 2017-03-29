@@ -44,7 +44,7 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-         //   editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+  //editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
                 editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
@@ -61,10 +61,10 @@ public class EditCommandParser {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_START_DATE).get()));
                 editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
             }
-//            if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
-//                Optional<String> parsePriority = Optional.of(getPriority(argsTokenizer.getValue(PREFIX_PRIORITY).get()));
-//                editTaskDescriptor.setPriority(ParserUtil.parsePriority(parsePriority));
-//            }
+//   if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
+//    Optional<String> parsePriority = Optional.of(getPriority(argsTokenizer.getValue(PREFIX_PRIORITY).get()));
+//    editTaskDescriptor.setPriority(ParserUtil.parsePriority(parsePriority));
+//    }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

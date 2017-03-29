@@ -51,7 +51,7 @@ public class AddCommand extends Command {
 
     public AddCommand(String name, String date, String endDate, String priority)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority(priority));
+        this.toAdd = new Task(new Name(name), new DueDate("date"), new DueDate("endDate"), false, new Priority(priority));
     }
 
     @Override
