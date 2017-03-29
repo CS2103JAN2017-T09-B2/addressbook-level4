@@ -25,7 +25,7 @@ public class AddCommandParser {
     private final int deadlineTaskWithTime = 1;
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
-    private static final String EMPTY_STRING = "";
+    private static final String NO_STRING = "";
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -93,7 +93,7 @@ public class AddCommandParser {
         try {
             return value.get();
         } catch (NoSuchElementException nsee) {
-            return EMPTY_STRING;
+            return NO_STRING;
         }
     }
 }
