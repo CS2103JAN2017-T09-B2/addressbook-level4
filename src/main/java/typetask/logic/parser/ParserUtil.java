@@ -14,6 +14,7 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.commons.util.StringUtil;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 import typetask.model.task.Time;
 
 /**
@@ -70,16 +71,16 @@ public class ParserUtil {
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
 
-    /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Date>} if {@code phone} is present.
-     */
-    public static Optional<DueDate> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new DueDate(phone.get())) : Optional.empty();
-    }
+//    /**
+//     * Parses a {@code Optional<String> phone} into an {@code Optional<Date>} if {@code phone} is present.
+//     */
+//    public static Optional<DueDate> parsePhone(Optional<String> phone) throws IllegalValueException {
+//        assert phone != null;
+//        return phone.isPresent() ? Optional.of(new DueDate(phone.get())) : Optional.empty();
+//    }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<DueDate>} if {@code date} is present.
      */
     public static Optional<DueDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
@@ -87,7 +88,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
      */
     public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
@@ -95,7 +96,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
+     * Parses {@code Collection<String> priority} into an {@code Optional<Priority>} if {@code priority} is present..
      */
-
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
+    }
 }

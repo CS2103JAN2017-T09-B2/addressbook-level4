@@ -413,7 +413,7 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             DueDate date = new DueDate("");
             DueDate endDate = new DueDate("");
-            Priority priority = new Priority("");
+            Priority priority = new Priority("Low");
             return new Task(name, date, endDate, false, priority);
         }
 
@@ -425,7 +425,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed), new DueDate(""),
-                    new DueDate("") , false, new Priority(""));
+                    new DueDate("") , false, new Priority("Low"));
         }
 
         /** Generates the correct add command based on the task given */
@@ -510,7 +510,7 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority(""));
+            return new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority("Low"));
         }
     }
 }

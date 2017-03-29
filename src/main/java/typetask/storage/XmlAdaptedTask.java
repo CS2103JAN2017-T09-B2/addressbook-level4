@@ -51,7 +51,7 @@ public class XmlAdaptedTask {
         if (source.getPriority() != null) {
             priority = source.getPriority().value;
         } else {
-            priority = "";
+            priority = "Low";
         }
 
         isCompleted = source.getIsCompleted();

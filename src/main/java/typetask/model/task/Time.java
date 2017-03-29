@@ -2,6 +2,10 @@ package typetask.model.task;
 
 import typetask.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents a task's date in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ */
 public class Time {
     public static final String MESSAGE_TIME_CONSTRAINTS =
             "Time should be in hh:mm am/pm format. hh range from 1 to 12 and mm range from 00 to 59.";

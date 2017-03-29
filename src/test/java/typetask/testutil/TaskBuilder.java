@@ -3,6 +3,7 @@ package typetask.testutil;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 
 /**
  *
@@ -40,6 +41,10 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withPriority(String priority) throws IllegalValueException {
+        this.task.setPriority(new Priority(priority));
+        return this;
+    }
     public TestTask build() {
         return this.task;
     }
