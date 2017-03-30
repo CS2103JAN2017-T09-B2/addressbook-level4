@@ -3,6 +3,8 @@ package typetask.logic.parser;
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static typetask.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -30,7 +32,8 @@ public class EditCommandParser {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE,
-                        PREFIX_END_DATE);
+                        PREFIX_END_DATE, PREFIX_PRIORITY);
+
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -42,6 +45,7 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+  //editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
                 Optional<String> emptyString = Optional.of("");
@@ -60,6 +64,10 @@ public class EditCommandParser {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_START_DATE).get()));
                 editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
             }
+//   if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
+//    Optional<String> parsePriority = Optional.of(getPriority(argsTokenizer.getValue(PREFIX_PRIORITY).get()));
+//    editTaskDescriptor.setPriority(ParserUtil.parsePriority(parsePriority));
+//    }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -83,4 +91,11 @@ public class EditCommandParser {
         return finalizedDate;
     }
 
+//    public String getPriority(String priority) {
+//        if (priority == "Low") {
+//            return "High";
+//        } else {
+//            return "Low";
+//        }
+//    }
 }

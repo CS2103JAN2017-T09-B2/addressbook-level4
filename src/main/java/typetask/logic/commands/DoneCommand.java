@@ -6,6 +6,9 @@ import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.TaskList.TaskNotFoundException;
 
+/**
+ * Marks task as done from identifying it's last displayed index from the TaskManager.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String COMMAND_WORD2 = "complete";

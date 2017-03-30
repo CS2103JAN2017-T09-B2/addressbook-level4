@@ -14,6 +14,8 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.commons.util.StringUtil;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
+import typetask.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -77,4 +79,19 @@ public class ParserUtil {
         return date.isPresent() ? Optional.of(new DueDate(date.get())) : Optional.empty();
     }
 
+    /**
+     * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
+     */
+    public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
+        assert time != null;
+        return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses {@code Collection<String> priority} into an {@code Optional<Priority>} if {@code priority} is present..
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
+    }
 }

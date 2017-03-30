@@ -3,6 +3,7 @@ package typetask.logic.parser;
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -23,13 +24,15 @@ public class AddCommandParser {
     private final int deadlineTaskWithTime = 1;
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
+    private final int priorityTask = 4;
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         try {
             int taskType = checkTaskType(argsTokenizer);
@@ -49,10 +52,16 @@ public class AddCommandParser {
                         argsTokenizer.getPreamble().get(),
                         getDate(argsTokenizer.getValue(PREFIX_TIME).get())
                         );
+            } else if (taskType == priorityTask) {
+                return new AddCommand(
+                        argsTokenizer.getPreamble().get(),
+                        null,
+                        null,
+                        argsTokenizer.getValue(PREFIX_PRIORITY).get()
+                        );
             } else {
                 return new AddCommand(
-                        argsTokenizer.getPreamble().get()
-                        );
+                        argsTokenizer.getPreamble().get());
             }
 
         } catch (NoSuchElementException nsee) {
@@ -70,6 +79,8 @@ public class AddCommandParser {
             return deadlineTaskWithDate;
         } else if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
             return deadlineTaskWithTime;
+        } else if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
+            return priorityTask;
         } else {
             return floatingTask;
         }
@@ -90,4 +101,5 @@ public class AddCommandParser {
 
         return finalizedDate;
     }
+
 }

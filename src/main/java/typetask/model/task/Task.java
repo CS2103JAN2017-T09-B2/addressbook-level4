@@ -14,16 +14,18 @@ public class Task implements ReadOnlyTask {
     private DueDate date;
     private boolean isCompleted;
     private DueDate endDate;
+    private Priority priority;
 
     /**
      * Every field must be present and not null.
      */
 
-    public Task(Name name, DueDate date, DueDate endDate, boolean isCompleted) {
+    public Task(Name name, DueDate date, DueDate endDate, boolean isCompleted, Priority priority) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.date = date;
         this.endDate = endDate;
+        this.priority = priority;
         this.isCompleted = isCompleted;
     }
 
@@ -32,7 +34,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
        this(source.getName(), source.getDate(), source.getEndDate(),
-              source.getIsCompleted());
+              source.getIsCompleted(), source.getPriority());
     }
 
     public void setName(Name name) {
@@ -49,10 +51,14 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
-
     //@@author A0144902L
     public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+
+    //@@author A0144902L
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     @Override
@@ -69,12 +75,18 @@ public class Task implements ReadOnlyTask {
     public DueDate getEndDate() {
         return endDate;
     }
-
     //@@author A0144902L
     @Override
     public boolean getIsCompleted() {
         return isCompleted;
     }
+
+    //@@author A0144902L
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
     //@@author A0139154E
     public String getIsCompletedToString() {
         if (isCompleted) {
@@ -93,10 +105,11 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
         this.setEndDate(replacement.getEndDate());
+        this.setPriority(replacement.getPriority());
     }
 
+    //@@author A0144902L
     /**
-     * @@author A0144902L
      * Marks this task as completed {boolean is set TRUE}.
      */
     public void markComplete(ReadOnlyTask complete) {
