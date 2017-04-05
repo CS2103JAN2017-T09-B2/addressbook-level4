@@ -1,6 +1,7 @@
 package typetask.model;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import typetask.commons.core.ComponentManager;
 import typetask.commons.core.LogsCenter;
 import typetask.commons.core.UnmodifiableObservableList;
@@ -29,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private SortedList<ReadOnlyTask> sortedTasks;
 
     //@@author A0139926R
     private Stack<TaskManager> taskManagerHistory = new Stack<TaskManager>();
@@ -49,6 +52,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        sortedTasks = new SortedList<>(filteredTasks);
+        sortedTasks.setComparator(new timeComparator());
         updateFilteredTaskList(false);
     }
 
@@ -89,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
         assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        int taskManagerIndex = sortedTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
@@ -171,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        return new UnmodifiableObservableList<>(sortedTasks);
     }
 
     @Override
@@ -324,6 +329,34 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "showToday=" + today;
         }
+    }
+
+    //@@author A0139154E
+    /**
+     * Comparator class for SortedList<ReadOnlyTask>
+     */
+    class timeComparator implements Comparator<ReadOnlyTask> {
+
+      @Override
+      public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+          if (!o1.getEndDate().value.equals("") && !o2.getEndDate().value.equals("")) {
+              List<Date> o1Dates = DateParser.parse(o1.getEndDate().value);
+              Date o1Date = o1Dates.get(0);
+          
+              List<Date> o2Dates = DateParser.parse(o2.getEndDate().value);
+              Date o2Date = o2Dates.get(0);
+              if (o2Date.after(o1Date)) {
+                  return -1;
+              }
+          } else if (!o1.getEndDate().value.equals("") && o2.getEndDate().value.equals("")) {
+              return -1;
+          } else {
+              return 1;
+          }
+          
+          return 1;
+      }
+
     }
 
 }
