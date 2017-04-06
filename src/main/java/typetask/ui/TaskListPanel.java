@@ -102,10 +102,10 @@ public class TaskListPanel extends UiPart<Region> {
           } else if (!o1.getEndDate().value.equals("") && o2.getEndDate().value.equals("")) {
               return -1;
           } else {
-              return 1;
+              return 0;
           }
           
-          return 1;
+          return 0;
       }
 
     }
