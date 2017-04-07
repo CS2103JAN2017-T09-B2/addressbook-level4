@@ -37,17 +37,17 @@ public class SettingCommand extends Command {
         mcd.setTaskManagerFilePath(FileUtil.getPath(path));
         storage.setTaskManagerFilePath(path);
         storage.saveTaskManager(model.getTaskManager());
-        
+
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
-    //@@author A0144902L
-    public boolean isInvalidPath(){
+  //@@author A0144902L
+    public boolean isInvalidPath() {
         if (path.contains(SYMBOL_PLUS) || path.contains (SYMBOL_HASH) ||
                 path.contains (SYMBOL_CARET) || path.contains (SYMBOL_ASTERISK)) {
             return true;
-        }
-        else
+        } else {
             return false;
+        }
     }
 
 }
