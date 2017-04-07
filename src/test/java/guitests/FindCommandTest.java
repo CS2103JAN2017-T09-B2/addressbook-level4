@@ -20,7 +20,7 @@ public class FindCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void findEmptyList() {
+    public void find_emptyList() {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }
@@ -29,6 +29,12 @@ public class FindCommandTest extends AddressBookGuiTest {
     public void findInvalidCommandFail() {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void find_usingSearchCommand() {
+        assertFindResult("search Mark"); // no results
+        assertFindResult("search Meier", td.benson, td.daniel); // multiple results
     }
 
     private void assertFindResult(String command, TestTask... expectedHits) {

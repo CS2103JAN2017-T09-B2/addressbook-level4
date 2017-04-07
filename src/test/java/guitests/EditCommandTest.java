@@ -19,7 +19,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     private TestTask[] expectedPersonsList = td.getTypicalTasks();
 
     @Test
-    public void editAllFieldsSpecifiedSuccess() throws Exception {
+    public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby ";
         int addressBookIndex = 1;
 
