@@ -6,7 +6,7 @@ import typetask.commons.core.Messages;
 import typetask.logic.commands.SaveCommand;
 
 //@@author A0144902L
-public class SaveCommandTest extends AddressBookGuiTest{
+public class SaveCommandTest extends AddressBookGuiTest {
 
     @Test
     public void save() {
