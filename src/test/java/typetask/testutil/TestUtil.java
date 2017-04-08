@@ -29,6 +29,7 @@ import typetask.TestApp;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.commons.util.FileUtil;
 import typetask.commons.util.XmlUtil;
+import typetask.logic.parser.DateParser;
 import typetask.model.TaskManager;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
@@ -50,6 +51,8 @@ public class TestUtil {
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
+    
+    public static final TimeComparator timeComparator = new TimeComparator();
 
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
@@ -304,6 +307,7 @@ public class TestUtil {
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.addAll(asList(tasksToAdd));
+        listOfTasks.sort(timeComparator);
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
@@ -318,6 +322,5 @@ public class TestUtil {
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
-
 
 }

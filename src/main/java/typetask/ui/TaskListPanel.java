@@ -1,5 +1,8 @@
 package typetask.ui;
 
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -13,6 +16,7 @@ import javafx.scene.layout.Region;
 import typetask.commons.core.LogsCenter;
 import typetask.commons.events.ui.TaskPanelSelectionChangedEvent;
 import typetask.commons.util.FxViewUtil;
+import typetask.logic.parser.DateParser;
 import typetask.model.task.ReadOnlyTask;
 
 /**
@@ -27,6 +31,8 @@ public class TaskListPanel extends UiPart<Region> {
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
+//        SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(taskList);
+//        sortedTasks.setComparator(new timeComparator());
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
@@ -73,6 +79,34 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    //@@author A0139154E
+    /**
+     * Comparator class for SortedList<ReadOnlyTask>
+     */
+    class timeComparator implements Comparator<ReadOnlyTask> {
+
+      @Override
+      public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+          if (!o1.getEndDate().value.equals("") && !o2.getEndDate().value.equals("")) {
+              List<Date> o1Dates = DateParser.parse(o1.getEndDate().value);
+              Date o1Date = o1Dates.get(0);
+          
+              List<Date> o2Dates = DateParser.parse(o2.getEndDate().value);
+              Date o2Date = o2Dates.get(0);
+              if (o2Date.after(o1Date)) {
+                  return -1;
+              }
+          } else if (!o1.getEndDate().value.equals("") && o2.getEndDate().value.equals("")) {
+              return -1;
+          } else {
+              return 1;
+          }
+          
+          return 1;
+      }
+
     }
 
 }
